@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  api:
+    image: node
+    depends_on:
+      - db
+    ports:
+      - 4000:4000
+    command: bash -c "yarn dev"
+    working_dir: /app
+    volumes:
+      - ./zenbit-test-api/:/app
+
+  client:
+    image: node
+    ports:
+      - "3000:3000"
+    command: sh -c "yarn start"
+    working_dir: /app
+    stdin_open: true
+    volumes:
+      - ./zenbit-test/:/app
+
+  db:
+    image: 'bitnami/postgresql'
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRESQL_USERNAME=docker
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=app
+    volumes:
+      - 'postgresql_data:/bitnami/postgresql'
+
+volumes:
+  postgresql_data:
+    driver: local

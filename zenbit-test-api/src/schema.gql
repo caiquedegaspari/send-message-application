@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  name: String!
+  email: String!
+  message: String!
+}
+
+type Query {
+  hello: String!
+}
+
+type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+}
+
+input CreateCommentInput {
+  name: String!
+  email: String!
+  message: String!
+}
